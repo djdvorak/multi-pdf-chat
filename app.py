@@ -2,7 +2,7 @@ import streamlit as st
 from dotenv import load_dotenv
 from pypdf import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.embeddings import OpenAIEmbeddings, HuggingFaceInstructEmbeddings
+from langchain.embeddings import OpenAIEmbeddings #, HuggingFaceInstructEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
@@ -70,27 +70,27 @@ def main():
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = None
 
-    st.header("Chat with multiple PDFs :books:")
-    user_question = st.text_input("Ask a question about your documents:")
+    st.header("Chat with a post-concussion syndrome virtual assistant")
+    user_question = st.text_input("Ask a question about post-concussion syndrome:")
     if user_question:
         handle_userinput(user_question)
 
     with st.sidebar:
-        st.subheader("Your documents")
-        pdf_docs = st.file_uploader("Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
-        if st.button("Process"):
-            with st.spinner("Processing"):
-                # get pdf text
-                raw_text = get_pdf_text(pdf_docs)
+        st.subheader("This is the sidebar")
+        #pdf_docs = st.file_uploader("Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
+        #if st.button("Process"):
+        #    with st.spinner("Processing"):
+                # # get pdf text
+                # raw_text = get_pdf_text(pdf_docs)
                 
-                # get the text chunks
-                text_chunks = get_text_chunks(raw_text)
+                # # get the text chunks
+                # text_chunks = get_text_chunks(raw_text)
 
-                # create vector store
-                vectorstore = get_vectorstore(text_chunks)
+                # # create vector store
+                # vectorstore = get_vectorstore(text_chunks)
 
-                # create conversation chain
-                st.session_state.conversation = get_conversation_chain(vectorstore)
+                # # create conversation chain
+                # st.session_state.conversation = get_conversation_chain(vectorstore)
     
 
 if __name__ == '__main__':
